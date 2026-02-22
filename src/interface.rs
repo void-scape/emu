@@ -26,7 +26,7 @@ pub fn start(emulator: Emulator) {
                     primary_window: Some(Window {
                         title: "Emu".into(),
                         resizable: false,
-                        resolution: WindowResolution::new(1920., 1080.),
+                        // resolution: WindowResolution::new(1920., 1080.),
                         present_mode: PresentMode::Immediate,
                         ..Default::default()
                     }),
@@ -273,7 +273,7 @@ fn display_registers(
 
     for (mut text, reg) in regs.iter_mut() {
         let padding = if reg.0.reg_index() < 10 { " " } else { "" };
-        text.sections[0].style.font_size = (window.resolution.physical_height() / 32) as f32;
+        text.sections[0].style.font_size = (window.resolution.physical_height() / 64) as f32;
         text.sections[0].value = format!(
             "x{}    {}{:#018x}",
             reg.0.reg_index(),

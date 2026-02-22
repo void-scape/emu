@@ -10,7 +10,7 @@ fn main() {
                 let fname = entry.path();
                 let fname = fname.file_stem().unwrap();
 
-                let output = Command::new("riscv64-unknown-elf-gcc")
+                let output = Command::new("riscv64-elf-gcc")
                     .arg("-S")
                     .arg("-nostdlib")
                     .arg("-fno-exceptions")
@@ -48,7 +48,7 @@ fn main() {
         sfiles
     };
 
-    let mut output = Command::new("riscv64-unknown-elf-gcc");
+    let mut output = Command::new("riscv64-elf-gcc");
     output
         .arg("-nostdlib")
         .arg("-emain")
@@ -68,7 +68,7 @@ fn main() {
         println!("assembler: {}", String::from_utf8_lossy(&output.stderr));
     }
 
-    let output = Command::new("riscv64-unknown-elf-objcopy")
+    let output = Command::new("riscv64-elf-objcopy")
         .arg("-O")
         .arg("binary")
         .arg("./emu/build/emu.o")
@@ -83,7 +83,7 @@ fn main() {
         println!("{}", String::from_utf8_lossy(&output.stderr));
     }
 
-    let objdump_output = Command::new("riscv64-unknown-elf-objdump")
+    let objdump_output = Command::new("riscv64-elf-objdump")
         .arg("-d")
         .arg("./emu/build/emu.o")
         .output()
